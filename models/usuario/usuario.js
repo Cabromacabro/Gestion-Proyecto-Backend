@@ -17,8 +17,8 @@ const userSchema = new Schema({
     required: true,
     unique: true,
     validate: {
-      validator: (email) => {
-        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+      validator: (correo) => {
+        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(correo);
       },
       // (email) => {
       //   if (email.includes('@') && email.includes('.')) {
