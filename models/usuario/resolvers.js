@@ -2,13 +2,20 @@ import { UserModel } from './usuario.js';
 
 const resolversUsuario = {
   Query: {
-    Usuarios: async (parent, args) => {
-      console.log('context', context);
-      if (context.userData.rol === 'ADMINISTRADOR') {
-      const usuarios = await UserModel.find();
+    Usuarios: async (parent, args, context) => {
+      const usuarios = await UserModel.find().populate([
+        {
+          path: 'inscripciones',
+          populate: {
+            path: 'proyecto',
+            populate: [{ path: 'lider' }, { path: 'avances' }],
+          },
+        },
+        {
+          path: 'proyectosLiderados',
+        },
+      ]);
       return usuarios;
-    }
-    return null;
     },
     Usuario: async (parent, args) => {
       const usuario = await UserModel.findOne({ _id: args._id });
@@ -17,12 +24,15 @@ const resolversUsuario = {
   },
   Mutation: {
     crearUsuario: async (parent, args) => {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(args.password, salt);
       const usuarioCreado = await UserModel.create({
         nombre: args.nombre,
         apellido: args.apellido,
         identificacion: args.identificacion,
         correo: args.correo,
         rol: args.rol,
+        password: hashedPassword,
       });
 
       if (Object.keys(args).includes('estado')) {

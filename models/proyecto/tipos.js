@@ -65,7 +65,7 @@ const tiposProyecto = gql`
       idProyecto: String!
       campos: camposObjetivo
     ): Proyecto
-    
+
     editarObjetivo(
       idProyecto: String!
       indexObjetivo: Int!
