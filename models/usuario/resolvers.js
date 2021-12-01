@@ -3,9 +3,12 @@ import { UserModel } from './usuario.js';
 const resolversUsuario = {
   Query: {
     Usuarios: async (parent, args) => {
-      console.log('parent usuario', parent);
+      console.log('context', context);
+      if (context.userData.rol === 'ADMINISTRADOR') {
       const usuarios = await UserModel.find();
       return usuarios;
+    }
+    return null;
     },
     Usuario: async (parent, args) => {
       const usuario = await UserModel.findOne({ _id: args._id });

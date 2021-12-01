@@ -27,7 +27,43 @@ const resolversAutenticacion = {
         }),
       };
     },
+
+  login: async (parent, args) => {
+    const usuarioEncontrado = await UserModel.findOne({ correo: args.correo });
+    if (await bcrypt.compare(args.password, usuarioEncontrado.password)) {
+      return {
+        token: generateToken({
+          _id: usuarioEncontrado._id,
+          nombre: usuarioEncontrado.nombre,
+          apellido: usuarioEncontrado.apellido,
+          identificacion: usuarioEncontrado.identificacion,
+          correo: usuarioEncontrado.correo,
+          rol: usuarioEncontrado.rol,
+        }),
+      };
+    }
+  },
+
+  refreshToken: async (parent, args, context) => {
+    console.log('contexto', context);
+    if (!context.userData) {
+      return {
+        error: 'token inválido',
+      };
+    } else {
+      return {
+        token: generateToken({
+          _id: context.userData._id,
+          nombre: context.userData.nombre,
+          apellido: context.userData.apellido,
+          identificacion: context.userData.identificacion,
+          correo: context.userData.correo,
+          rol: context.userData.rol,
+        }),
+      };
+    }
+    },
   },
 };
 
-export { resolversAutenticacion };
+export { resolversAutenticacion }; 
