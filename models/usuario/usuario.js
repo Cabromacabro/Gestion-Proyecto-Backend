@@ -2,15 +2,6 @@ import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 // import { Enum_Rol, Enum_EstadoUsuario } from '../enums/enums';
 
-// interface User {
-//   correo: string;
-//   identificacion: string;
-//   nombre: string;
-//   apellido: string;
-//   rol: Enum_Rol;
-//   estado: Enum_EstadoUsuario;
-// }
-
 const userSchema = new Schema({
   correo: {
     type: String,
@@ -20,13 +11,6 @@ const userSchema = new Schema({
       validator: (correo) => {
         return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(correo);
       },
-      // (email) => {
-      //   if (email.includes('@') && email.includes('.')) {
-      //     return true;
-      //   } else {
-      //     return false;
-      //   }
-      // },
       message: 'El formato del correo electrónico está malo.',
     },
   },
