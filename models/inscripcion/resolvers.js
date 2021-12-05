@@ -1,3 +1,4 @@
+import { ProjectModel} from '../proyecto/proyecto.js';
 import { InscriptionModel } from './inscripcion.js';
 
 const resolverInscripciones = {

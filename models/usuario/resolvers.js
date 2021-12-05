@@ -1,5 +1,6 @@
 import { UserModel } from './usuario.js';
 import bcrypt from 'bcrypt';
+import { InscriptionModel } from '../inscripcion/inscripcion.js';
 
 const resolversUsuario = {
   Usuario: {
