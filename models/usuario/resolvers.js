@@ -15,9 +15,6 @@ const resolversUsuario = {
         {
           path: 'proyectosLiderados',
         },
-        {
-          path: 'avances',
-        },
       ]);
       return usuarios;
     },
