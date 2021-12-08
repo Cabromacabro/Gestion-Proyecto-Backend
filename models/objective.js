@@ -1,7 +1,5 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
-// import { Enum_TipoObjetivo } from './enums/enums.js';
-// import { ProjectModel } from './proyecto/proyecto.js';
 
 const objectiveSchema = new Schema({
   descripcion: {
