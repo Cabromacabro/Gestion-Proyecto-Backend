@@ -25,7 +25,9 @@ const resolversProyecto = {
         if (context.userData.rol === 'LIDER') {
           const proyectos = await ProjectModel.find({ lider: context.userData._id });
           return proyectos;
-        }      
+        } else if (context.userData.rol === 'LIDER') {
+          //const proyectos = await ProjectModel.find({ lider: context.userData._id });
+        }    
     }
     const proyectos = await ProjectModel.find();
           return proyectos;
