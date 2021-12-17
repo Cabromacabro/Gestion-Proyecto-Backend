@@ -29,7 +29,7 @@ const resolversAvance = {
         creadoPor: args.creadoPor,
       });
       const avances = await ModeloAvance.find({
-        proyecto: avanceCreado.proyecto
+        proyecto: avanceCreado.proyecto,
       });
 
       if (avances.length === 1) {
@@ -43,6 +43,18 @@ const resolversAvance = {
       }
 
       return avanceCreado;
+    },
+    crearObservacion: async (parents, args) => {
+      const avanceModificado = await ModeloAvance.findOneAndUpdate(
+        args._id,
+        {
+          $addToSet: {
+            observaciones: args.observacion,
+          },
+        },
+        { new: true }
+      );
+      return avanceModificado;
     },
   },
 };
